@@ -1,19 +1,5 @@
 import React from 'react';
 
-var appCards = {
-  header: 'React Integration',
-  cards: [
-    {id: 1, appName: "Pete Hunt", vendorName: "This is one comment", tagline: "This is the tagline is one comment"},
-    {id: 2, appName: "Jordan Walke", vendorName: "This is another comment", tagline: "This is the tagline is one comment"},
-    {id: 3, appName: "Pete Hunt Pepe", vendorName: "This is vendor name", tagline: "This is the tagline is one comment"},
-    {id: 4, appName: "Jordan Walke Maria", vendorName: "This is vendorname", tagline: "This is the tagline is one comment 2"},
-    {id: 5, appName: "Jordan Walke", vendorName: "This is another comment", tagline: "This is the tagline is one comment"},
-    {id: 6, appName: "Jordan Walke Maria", vendorName: "This is vendorname", tagline: "This is the tagline is one comment 2"},
-    {id: 7, appName: "Pete Hunt", vendorName: "This is one comment", tagline: "This is the tagline is one comment"},
-    {id: 8, appName: "Pete Hunt Pepe", vendorName: "This is vendor name", tagline: "This is the tagline is one comment"}
-  ]
-};
-
 var AppCardIconComp = React.createClass({
   render: function() {
     console.log(this.props);
@@ -89,19 +75,11 @@ var AppCardBoxComp = React.createClass({
     console.log('AppCardBoxComp', this.props);
     return (
       <div>
-        <div>{ this.props.data.header }</div>
+        <h1>{ this.props.data.header }</h1>
         <AppCardComp data={ this.props.data.cards } />
       </div>
     );
   }
 });
 
-let Home = React.createClass({
-  render() {
-    return(
-      <AppCardBoxComp data={ appCards } />
-    );
-  }
-});
-
-export default Home;
+export default AppCardBoxComp;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Grid, Row, Col, DropdownButton, MenuItem, FormGroup, InputGroup, FormControl, Glyphicon } from 'react-bootstrap';
 
 const App = ({ children }) => (
   <div>
@@ -22,6 +23,31 @@ const App = ({ children }) => (
         </div>
       </div>
     </nav>
+
+    <section>
+      <Grid>
+        <Row className="show-grid">
+          <Col xs={6} sm={4}>
+            <DropdownButton title="Dropdown" id="bg-nested-dropdown">
+              <MenuItem eventKey="1">Dropdown link</MenuItem>
+              <MenuItem eventKey="2">Dropdown link</MenuItem>
+            </DropdownButton>
+          </Col>
+          <Col xs={12} sm={8}>
+            <form>
+              <FormGroup>
+                <InputGroup>
+                  <FormControl type="text" />
+                  <InputGroup.Addon>
+                    <Glyphicon glyph="search" />
+                  </InputGroup.Addon>
+                </InputGroup>
+              </FormGroup>
+            </form>
+          </Col>
+        </Row>
+      </Grid>
+    </section>
 
     <section className="container">
       { children }

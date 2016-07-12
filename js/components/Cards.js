@@ -1,4 +1,5 @@
 import React from 'react';
+import { Grid, Row, Col, DropdownButton, MenuItem, FormGroup, InputGroup, FormControl, Glyphicon, Thumbnail, Button } from 'react-bootstrap';
 
 var AppCardIconComp = React.createClass({
   render: function() {
@@ -39,16 +40,20 @@ var AppCard = React.createClass({
     console.log('AppCardItemComp', this.props);
     return (
       <a href="" onClick={ this.onClickHandler }>
-        <div>
-          { this.props.item.appName }
-        </div>
-        <div>
-          by { this.props.item.vendorName }
-        </div>
-        <div>
-          { this.props.item.tagline }
-        </div>
-        <AppCardRatingsComp />
+        <Col sm={4} md={3}>
+          <Thumbnail src="/assets/thumbnaildiv.png" alt="242x200">
+            <h3>
+              { this.props.item.appName }
+            </h3>
+            <div>
+              by { this.props.item.vendorName }
+            </div>
+            <div>
+              { this.props.item.tagline }
+            </div>
+            <AppCardRatingsComp />
+          </Thumbnail>
+        </Col>
       </a>
     );
   }
@@ -63,9 +68,9 @@ var AppCardComp = React.createClass({
       );
     });
     return (
-      React.createElement('div', {},
-        cardNode
-      )
+      <Row>
+        { cardNode }
+      </Row>
     );
   }
 });

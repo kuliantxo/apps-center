@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Grid, Row, Col, DropdownButton, MenuItem, FormGroup, InputGroup, FormControl, Glyphicon } from 'react-bootstrap';
+import { Grid, Row, Col, Button, DropdownButton, MenuItem, FormGroup, InputGroup, FormControl, Glyphicon } from 'react-bootstrap';
 
 const App = ({ children }) => (
   <div>
@@ -38,9 +38,13 @@ const App = ({ children }) => (
               <FormGroup>
                 <InputGroup>
                   <FormControl type="text" />
-                  <InputGroup.Addon>
-                    <Glyphicon glyph="search" />
-                  </InputGroup.Addon>
+                  <ul className="dropdown-menu" role="menu" aria-labelledby="bg-nested-dropdown">
+                    <MenuItem eventKey="1">Dropdown link</MenuItem>
+                    <MenuItem eventKey="2">Dropdown link</MenuItem>
+                  </ul>
+                  <InputGroup.Button>
+                    <Button><Glyphicon glyph="search" /></Button>
+                  </InputGroup.Button>
                 </InputGroup>
               </FormGroup>
             </form>
@@ -54,7 +58,5 @@ const App = ({ children }) => (
     </section>
   </div>
 );
-
-// App.propTypes = { children: React.PropTypes.object };
 
 export default App;

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Grid, Row, Col, Button, DropdownButton, MenuItem, FormGroup, InputGroup, FormControl, Glyphicon } from 'react-bootstrap';
+// https://github.com/webpack/less-loader
+require("../../file.less");
 
 var App = React.createClass({
   getInitialState: function() {

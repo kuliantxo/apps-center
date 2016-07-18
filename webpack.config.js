@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // https://www.codementor.io/reactjs/tutorial/beginner-guide-setup-reactjs-environment-npm-babel-6-webpack
 // var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
@@ -14,15 +15,19 @@ module.exports = {
         path: __dirname + '/build',
         filename: "bundle.js"
     },
+//    devtool: 'source-map',
     module: {
         loaders: [
             { test: /\.jsx?$/, loaders: ['react-hot', 'babel'], include: /src/ },
 //            { test: /\.js$/, include: /src/, loader: 'babel-loader'},
-            { test: /\.css$/, loader: "style!css" }
+            { test: /\.less$/, loader: ExtractTextPlugin.extract(
+                    // activate source maps via loader query
+                    'css?sourceMap!' +
+                    'less?sourceMap') }
         ]
     },
     plugins: [
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
+      new ExtractTextPlugin('styles.css')
     ]
-
 };

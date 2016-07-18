@@ -48,21 +48,35 @@ let AppCardDescription = React.createClass({
           </div>
         </div>
         <div className="col-sm-4">
-          <div className="thumbnail">
-            <div>
-              <img className="thumbnail-img" src="https://img.youtube.com/vi/WNxXbHQBb8w/0.jpg" />
+          <div className="row">
+            <div className="col-sm-6">
+              <div className="thumbnail">
+                <img src="https://img.youtube.com/vi/WNxXbHQBb8w/0.jpg" />
+              </div>
             </div>
-            <div>
-              <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature1.PNG" alt="Integrated Requisition Screen" title="Integrated Requisition Screen" />
+            <div className="col-sm-6">
+              <div className="thumbnail">
+                <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature1.PNG" alt="Integrated Requisition Screen" title="Integrated Requisition Screen" />
+              </div>
             </div>
-            <div>
-              <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature2.PNG" alt="Informative Home Screen" title="Informative Home Screen" />
+          </div>
+          <div className="row">
+            <div className="col-sm-6">
+              <div className="thumbnail">
+                <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature2.PNG" alt="Informative Home Screen" title="Informative Home Screen" />
+              </div>
             </div>
-            <div>
-              <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature3.PNG" alt="User Management" title="User Management" />
+            <div className="col-sm-6">
+              <div className="thumbnail">
+                <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature3.PNG" alt="User Management" title="User Management" />
+              </div>
             </div>
-            <div>
-              <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature4.PNG" alt="Workflow Management" title="Workflow Management" />
+          </div>
+          <div className="row">
+            <div className="col-sm-6">
+              <div className="thumbnail">
+                <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature4.PNG" alt="Workflow Management" title="Workflow Management" />
+              </div>
             </div>
           </div>
         </div>

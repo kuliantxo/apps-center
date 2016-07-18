@@ -1,8 +1,9 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
-var APP_DIR = path.resolve(__dirname, 'src/client/app');
+// https://www.codementor.io/reactjs/tutorial/beginner-guide-setup-reactjs-environment-npm-babel-6-webpack
+// var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
+// var APP_DIR = path.resolve(__dirname, 'src/client/app');
 
 module.exports = {
     entry: [
@@ -16,7 +17,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.jsx?$/, loaders: ['react-hot', 'babel'], include: /src/ },
-//            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?presets[]=es2015&presets[]=react'},
+//            { test: /\.js$/, include: /src/, loader: 'babel-loader'},
             { test: /\.css$/, loader: "style!css" }
         ]
     },

@@ -1,8 +1,8 @@
 import React from 'react';
-import AppCardBoxComp from './Cards.js';
+import AppCardBoxComp from '../components/Cards.js';
 
 var appCards = {
-  header: 'My Apps',
+  header: 'All Apps',
   cards: [
     {id: 1, appName: "Pete Hunt", vendorName: "This is one comment", tagline: "This is the tagline is one comment"},
     {id: 2, appName: "Jordan Walke", vendorName: "This is another comment", tagline: "This is the tagline is one comment"},

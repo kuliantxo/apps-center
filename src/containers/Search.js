@@ -1,8 +1,8 @@
 import React from 'react';
-import AppCardBoxComp from './Cards.js';
+import AppCardBoxComp from '../components/Cards.js';
 
 var appCards = {
-  header: 'All Apps',
+  header: 'My Apps',
   cards: [
     {id: 1, appName: "Pete Hunt", vendorName: "This is one comment", tagline: "This is the tagline is one comment"},
     {id: 2, appName: "Jordan Walke", vendorName: "This is another comment", tagline: "This is the tagline is one comment"},
@@ -15,7 +15,7 @@ var appCards = {
   ]
 };
 
-let Home = React.createClass({
+let Search = React.createClass({
   render() {
     return(
       <AppCardBoxComp data={ appCards } />
@@ -23,4 +23,4 @@ let Home = React.createClass({
   }
 });
 
-export default Home;
+export default Search;

@@ -1,5 +1,5 @@
 import React from 'react';
-import AppCardBoxComp from './Cards.js';
+import AppCardBoxComp from '../components/Cards.js';
 
 var appCards = {
   header: 'My Apps',
@@ -15,7 +15,7 @@ var appCards = {
   ]
 };
 
-let Search = React.createClass({
+let Home = React.createClass({
   render() {
     return(
       <AppCardBoxComp data={ appCards } />
@@ -23,4 +23,4 @@ let Search = React.createClass({
   }
 });
 
-export default Search;
+export default Home;

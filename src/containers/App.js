@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Grid, Row, Col, Button, DropdownButton, MenuItem, FormGroup, InputGroup, FormControl, Glyphicon } from 'react-bootstrap';
 // https://github.com/webpack/less-loader
 require("../../file.less");
 
@@ -50,37 +49,45 @@ var App = React.createClass({
         </nav>
 
         <section>
-          <Grid>
-            <Row className="show-grid">
-              <Col xs={6} sm={4}>
-                <DropdownButton title="Dropdown" id="bg-nested-dropdown">
-                  <MenuItem eventKey="1">Dropdown link</MenuItem>
-                  <MenuItem eventKey="2">Dropdown link</MenuItem>
-                </DropdownButton>
-              </Col>
-              <Col xs={12} sm={8}>
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-4">
+                <div className="dropdown">
+                  <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Dropdown
+                    <span className="caret"></span>
+                  </button>
+                  <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" className="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div className="col-sm-4">
                 <form onSubmit={this.handleSubmit}>
-                  <FormGroup>
-                    <InputGroup id="search-form">
-                      <FormControl type="text"
-                        value={this.state.query}
-                        onChange={this.handleQueryChange}
-                      />
-                      <ul className="dropdown-menu" role="menu" aria-labelledby="bg-nested-dropdown">
-                        <MenuItem eventKey="1">Dropdown link</MenuItem>
-                        <MenuItem eventKey="2">Dropdown link</MenuItem>
-                      </ul>
-                      <InputGroup.Button>
-                        <Button><Glyphicon glyph="search" /></Button>
-                      </InputGroup.Button>
-                    </InputGroup>
-                  </FormGroup>
+                  <div className="input-group" id="search-form">
+                    <input type="text" className="form-control" placeholder="Search for..."
+                      value={this.state.query}
+                      onChange={this.handleQueryChange}
+                    />
+                    <ul className="dropdown-menu" role="menu" aria-labelledby="bg-nested-dropdown">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                    </ul>
+                    <span className="input-group-btn">
+                      <button className="btn btn-default" type="button">
+                        <span className="glyphicon glyphicon-search"></span>
+                      </button>
+                    </span>
+                  </div>
                 </form>
-              </Col>
-            </Row>
-          </Grid>
+              </div>
+            </div>
+          </div>
         </section>
-
         <section className="container">
           { this.props.children }
         </section>

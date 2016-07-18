@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Grid, Row, Col, DropdownButton, MenuItem, FormGroup, InputGroup, FormControl, Glyphicon, Thumbnail, Button } from 'react-bootstrap';
 
 var AppCardIconComp = React.createClass({
   render: function() {
@@ -41,8 +40,8 @@ var AppCard = React.createClass({
     console.log('AppCardItemComp', this.props);
     return (
       <Link to="/app/peperoni" onClick={ this.onClickHandler }>
-        <Col sm={4} md={3}>
-          <Thumbnail src="/assets/thumbnaildiv.png" alt="242x200">
+        <div className="col-sm-4">
+          <div className="thumbnail" src="/assets/thumbnaildiv.png" alt="242x200">
             <h3>
               { this.props.item.appName }
             </h3>
@@ -53,8 +52,8 @@ var AppCard = React.createClass({
               { this.props.item.tagline }
             </div>
             <AppCardRatingsComp />
-          </Thumbnail>
-        </Col>
+          </div>
+        </div>
       </Link>
     );
   }
@@ -69,9 +68,9 @@ var AppCardComp = React.createClass({
       );
     });
     return (
-      <Row>
+      <div className="row">
         { cardNode }
-      </Row>
+      </div>
     );
   }
 });

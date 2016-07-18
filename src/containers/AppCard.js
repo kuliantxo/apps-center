@@ -39,7 +39,7 @@ let AppCardDescription = React.createClass({
     return (
       <div className="row">
         <div className="col-sm-8">
-          <iframe name="player-iframe" id="appCardVideo" frameborder="0" title="YouTube video player" width="640" height="400" src="https://www.youtube.com/embed/WNxXbHQBb8w?widget_referrer=https%3A%2F%2Fqbo.intuit.com%2Fapp%2FqboAppCard%3FshortName%3Dtrxlinkerequisition&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fappcenter.intuit.com&amp;widgetid=1"></iframe>
+          <iframe name="player-iframe" id="appCardVideo" frameBorder="0" title="YouTube video player" width="640" height="400" src="https://www.youtube.com/embed/WNxXbHQBb8w?widget_referrer=https%3A%2F%2Fqbo.intuit.com%2Fapp%2FqboAppCard%3FshortName%3Dtrxlinkerequisition&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fappcenter.intuit.com&amp;widgetid=1"></iframe>
           <h3>
             Descriptioin
           </h3>

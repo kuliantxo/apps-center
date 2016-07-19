@@ -66,7 +66,7 @@ var App = React.createClass({
                   </ul>
                 </div>
               </div>
-              <div className="col-sm-4">
+              <div className="col-sm-8">
                 <form onSubmit={this.handleSubmit}>
                   <div className="input-group" id="search-form">
                     <input type="text" className="form-control" placeholder="Search for..."

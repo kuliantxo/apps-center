@@ -32,29 +32,28 @@ var AppCardRatingsComp = React.createClass({
 });
 
 var AppCard = React.createClass({
-  onClickHandler: function(){
-    event.preventDefault();
-    openAppCardDetails('app-b7p7hm22cm');
-  },
   render: function() {
     console.log('AppCardItemComp', this.props);
     return (
-      <Link to="/app/peperoni" onClick={ this.onClickHandler }>
-        <div className="col-sm-4">
-          <div className="thumbnail" src="/assets/thumbnaildiv.png" alt="242x200">
-            <h3>
-              { this.props.item.appName }
-            </h3>
-            <div>
-              by { this.props.item.vendorName }
+      <div className="col-sm-6 col-md-4 col-lg-3">
+        <Link to="/app/peperoni">
+          <div className="thumbnail">
+            <img src={ 'https://images.appcenter.intuit.com/Content/images/AppCards' + this.props.item.img } />
+            <div className="caption">
+              <h3>
+                { this.props.item.name }
+              </h3>
+              <div>
+                by { this.props.item.vendor }
+              </div>
+              <div>
+                { this.props.item.tagline }
+              </div>
+              <AppCardRatingsComp />
             </div>
-            <div>
-              { this.props.item.tagline }
-            </div>
-            <AppCardRatingsComp />
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     );
   }
 });
@@ -80,8 +79,7 @@ var AppCardBoxComp = React.createClass({
     console.log('AppCardBoxComp', this.props);
     return (
       <div>
-        <h1>{ this.props.data.header }</h1>
-        <AppCardComp data={ this.props.data.cards } />
+        <AppCardComp data={ this.props.data } />
       </div>
     );
   }

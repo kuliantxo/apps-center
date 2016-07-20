@@ -1,30 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
+import SearchBar from '../components/SearchBar.js';
 // https://github.com/webpack/less-loader
 require("../../file.less");
 
 var App = React.createClass({
-  getInitialState: function() {
-    return {query: ''};
-  },
-  handleQueryChange: function(e) {
-    this.setState({query: e.target.value});
-    if(document.querySelector('#search-form').className.indexOf(' open') == -1) {
-      document.querySelector('#search-form').className += " open";
-    }
-    document.querySelector('#search-form .form-control').addEventListener('blur', function() {
-      document.querySelector('#search-form').className = document.querySelector('#search-form').className.replace(' open', '');
-    });
-  },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var query = this.state.query.trim();
-    if (!query) {
-      return;
-    }
-    // TODO: send request to the server
-    this.setState({query: ''});
-  },
   render: function() {
     return (
       <div>
@@ -67,23 +47,7 @@ var App = React.createClass({
                 </div>
               </div>
               <div className="col-sm-8">
-                <form onSubmit={this.handleSubmit}>
-                  <div className="input-group" id="search-form">
-                    <input type="text" className="form-control" placeholder="Search for..."
-                      value={this.state.query}
-                      onChange={this.handleQueryChange}
-                    />
-                    <ul className="dropdown-menu" role="menu" aria-labelledby="bg-nested-dropdown">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                    </ul>
-                    <span className="input-group-btn">
-                      <button className="btn btn-default" type="button">
-                        <span className="glyphicon glyphicon-search"></span>
-                      </button>
-                    </span>
-                  </div>
-                </form>
+                <SearchBar />
               </div>
             </div>
           </div>

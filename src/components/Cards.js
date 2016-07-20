@@ -1,17 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-var AppCardIconComp = React.createClass({
-  render: function() {
-    console.log(this.props);
-    return (
-      <div>
-        <img src="https://vm-appcenter.intuit.com/Content/Static/images/appIcon_placeholder.png" />
-      </div>
-    );
-  }
-});
-
 var AppCardRatingsComp = React.createClass({
   render: function() {
     console.log(this.props);

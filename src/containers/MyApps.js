@@ -1,7 +1,7 @@
 import React from 'react';
 import AppCardBoxComp from '../components/Cards.js';
 
-let Home = React.createClass({
+let MyApps = React.createClass({
   getInitialState: function() {
     return {data: []};
   },
@@ -25,4 +25,4 @@ let Home = React.createClass({
   }
 });
 
-export default Home;
+export default MyApps;

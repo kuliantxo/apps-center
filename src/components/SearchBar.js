@@ -21,7 +21,7 @@ var DropDownMenu = React.createClass({
       );
     });
     return (
-      <ul className="dropdown-menu" role="menu" aria-labelledby="bg-nested-dropdown">
+      <ul className="dropdown-menu" role="menu">
         { dropDownItem }
       </ul>
     );
@@ -47,12 +47,6 @@ var SearchBar = React.createClass({
   },
   handleQueryChange: function(e) {
     this.setState({query: e.target.value});
-    if(document.querySelector('#search-form').className.indexOf(' open') == -1) {
-      document.querySelector('#search-form').className += " open";
-    }
-    document.querySelector('#search-form .form-control').addEventListener('blur', function() {
-      document.querySelector('#search-form').className = document.querySelector('#search-form').className.replace(' open', '');
-    });
   },
   handleSubmit: function(e) {
     e.preventDefault();
@@ -66,8 +60,8 @@ var SearchBar = React.createClass({
   render: function() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className="input-group" id="search-form">
-          <input type="text" className="form-control" placeholder="Search for..."
+        <div className="input-group">
+          <input type="text" className="dropdown-toggle form-control" data-toggle="dropdown"
             value={this.state.query}
             onChange={this.handleQueryChange}
           />

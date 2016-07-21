@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 
 var DropDownMenu = React.createClass({
   render: function() {
@@ -59,7 +60,7 @@ var SearchBar = React.createClass({
     if (!query) {
       return;
     }
-    // TODO: send request to the server
+    browserHistory.push('/search/' + query);
     this.setState({query: ''});
   },
   render: function() {
@@ -72,7 +73,7 @@ var SearchBar = React.createClass({
           />
           <DropDownMenu data={this.state.data} />
           <span className="input-group-btn">
-            <button className="btn btn-default" type="button">
+            <button className="btn btn-default" type="submit">
               <span className="glyphicon glyphicon-search"></span>
             </button>
           </span>

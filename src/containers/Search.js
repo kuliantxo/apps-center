@@ -1,5 +1,5 @@
 import React from 'react';
-import AppCardBoxComp from '../components/Cards.js';
+import AppCardBoxComp from '../components/cards/Cards.js';
 
 let Search = React.createClass({
   getInitialState: function() {

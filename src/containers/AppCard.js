@@ -1,17 +1,5 @@
 import React from 'react';
 
-var appCard = {
-  id: '1099misce-file',
-  code: '4220c271-51cd-4815-807e-ca64761af8c3',
-  img: '/b7nigcbq4n/Submitted15/tax1099-logo-qbapps.png',
-  name: '1099 MISC e-file by Tax1099.com',
-  vendor: 'by TechAtlantis, Inc',
-  tagline: 'E-File your year-end forms easily and quickly!',
-  rating: 5,
-  reviews: 3,
-  description: 'eRequisition™ uses the data from your QuickBooks Online company. Simply create a Purchase Requisition (PR) and send through a series of Approvals. Once the PR has been completely approved, a new Purchase Order will be created in QuickBooks.'
-};
-
 let AppCardTop = React.createClass({
   render: function() {
     console.log('AppCardTop', this.props);
@@ -86,11 +74,27 @@ let AppCardDescription = React.createClass({
 });
 
 let AppCard = React.createClass({
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    $.ajax({
+      url: "../../json/description.json",
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   render() {
     return(
       <div>
-        <AppCardTop data={ appCard } />
-        <AppCardDescription data={ appCard } />
+        <AppCardTop data={ this.state.data } />
+        <AppCardDescription data={ this.state.data } />
       </div>
     );
   }

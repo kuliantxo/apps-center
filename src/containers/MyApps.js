@@ -7,7 +7,7 @@ let MyApps = React.createClass({
   },
   componentDidMount: function() {
     $.ajax({
-      url: "my.json",
+      url: "../../json/my.json",
       dataType: 'json',
       cache: false,
       success: function(data) {

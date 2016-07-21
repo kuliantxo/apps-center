@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import SearchBar from '../components/SearchBar.js';
+import CategoryDropdown from '../components/CategoryDropdown.js';
 // https://github.com/webpack/less-loader
 require("../../file.less");
 
@@ -32,19 +33,7 @@ var App = React.createClass({
           <div className="container">
             <div className="row">
               <div className="col-sm-4">
-                <div className="dropdown">
-                  <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Dropdown
-                    <span className="caret"></span>
-                  </button>
-                  <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" className="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                  </ul>
-                </div>
+                <CategoryDropdown />
               </div>
               <div className="col-sm-8">
                 <SearchBar />

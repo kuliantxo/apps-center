@@ -1,13 +1,13 @@
 import React from 'react';
 import AppCardBoxComp from '../components/Cards.js';
 
-let Home = React.createClass({
+let Category = React.createClass({
   getInitialState: function() {
     return {data: []};
   },
   componentDidMount: function() {
     $.ajax({
-      url: "../../json/all.json",
+      url: "../../json/my.json",
       dataType: 'json',
       cache: false,
       success: function(data) {
@@ -25,4 +25,4 @@ let Home = React.createClass({
   }
 });
 
-export default Home;
+export default Category;

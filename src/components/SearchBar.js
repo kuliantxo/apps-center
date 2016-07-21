@@ -21,7 +21,7 @@ var DropDownMenu = React.createClass({
       );
     });
     return (
-      <ul className="dropdown-menu" role="menu">
+      <ul className="dropdown-menu hide" role="menu">
         { dropDownItem }
       </ul>
     );
@@ -34,7 +34,7 @@ var SearchBar = React.createClass({
   },
   componentDidMount: function() {
     $.ajax({
-      url: "my.json",
+      url: "../../json/my.json",
       dataType: 'json',
       cache: false,
       success: function(data) {
@@ -47,6 +47,11 @@ var SearchBar = React.createClass({
   },
   handleQueryChange: function(e) {
     this.setState({query: e.target.value});
+    if (e.target.value.length > 3) {
+      $('.search-bar-form .dropdown-menu').removeClass('hide');
+    } else {
+      $('.search-bar-form .dropdown-menu').addClass('hide');
+    }
   },
   handleSubmit: function(e) {
     e.preventDefault();
@@ -59,7 +64,7 @@ var SearchBar = React.createClass({
   },
   render: function() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="search-bar-form">
         <div className="input-group">
           <input type="text" className="dropdown-toggle form-control" data-toggle="dropdown"
             value={this.state.query}

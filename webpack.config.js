@@ -7,27 +7,27 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 // var APP_DIR = path.resolve(__dirname, 'src/client/app');
 
 module.exports = {
-    entry: [
-      'webpack/hot/only-dev-server',
-      "./src/app.js"
-    ],
-    output: {
-        path: __dirname + '/build',
-        filename: "bundle.js"
-    },
+  entry: [
+    'webpack/hot/only-dev-server',
+    "./src/app.js"
+  ],
+  output: {
+      path: __dirname + '/build',
+      filename: "bundle.js"
+  },
 //    devtool: 'source-map',
-    module: {
-        loaders: [
-            { test: /\.jsx?$/, loaders: ['react-hot', 'babel'], include: /src/ },
+  module: {
+      loaders: [
+          { test: /\.jsx?$/, loaders: ['react-hot', 'babel'], include: /src/ },
 //            { test: /\.js$/, include: /src/, loader: 'babel-loader'},
-            { test: /\.less$/, loader: ExtractTextPlugin.extract(
-                    // activate source maps via loader query
-                    'css?sourceMap!' +
-                    'less?sourceMap') }
-        ]
-    },
-    plugins: [
-      new webpack.NoErrorsPlugin(),
-      new ExtractTextPlugin('styles.css')
-    ]
+          { test: /\.less$/, loader: ExtractTextPlugin.extract(
+                  // activate source maps via loader query
+                  'css?sourceMap!' +
+                  'less?sourceMap') }
+      ]
+  },
+  plugins: [
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('styles.css')
+  ]
 };

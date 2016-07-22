@@ -20,7 +20,10 @@ let Home = React.createClass({
   },
   render() {
     return(
-      <AppCardBoxComp data={ this.state.data } />
+      <div>
+        <h1>All Apps</h1>
+        <AppCardBoxComp data={ this.state.data } />
+      </div>
     );
   }
 });

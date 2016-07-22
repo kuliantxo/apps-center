@@ -20,7 +20,10 @@ let Search = React.createClass({
   },
   render() {
     return(
-      <AppCardBoxComp data={ this.state.data } />
+      <div>
+        <h1>Search: { this.props.params.query }</h1>
+        <AppCardBoxComp data={ this.state.data } />
+      </div>
     );
   }
 });

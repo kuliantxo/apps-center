@@ -60,8 +60,11 @@ var SearchBar = React.createClass({
     if (!query) {
       return;
     }
-    browserHistory.push('/search/' + query);
     this.setState({query: ''});
+    $('.search-bar-form input').blur();
+    $('.search-bar-form button').blur();
+    $('.search-bar-form .dropdown-menu').addClass('hide');
+    browserHistory.push('/search/' + query);
   },
   render: function() {
     return (

@@ -3,7 +3,7 @@ import AppCardBoxComp from '../components/cards/Cards.js';
 
 let CategoryTitle = React.createClass({
   getInitialState: function() {
-    return {data: []};
+    return {data: ''};
   },
   componentDidMount: function() {
     $.ajax({
@@ -11,8 +11,9 @@ let CategoryTitle = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(data) {
+console.log('CategoryTitle ajax', this.props.cat);
 console.log('CategoryTitle ajax', data);
-        this.setState({data: data});
+        this.setState({data: data[this.props.cat].name});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -23,7 +24,7 @@ console.log('CategoryTitle ajax', data);
 //    console.log('CategoryTitle', this.props.cat);
 //    console.log('CategoryTitle', this.state.data);
     return(
-      <h1>{ this.props.cat }</h1>
+      <h1>{ this.state.data }</h1>
 //      <h1>{ this.state.data[this.props.cat].name }</h1>
     );
   }
@@ -50,7 +51,7 @@ let Category = React.createClass({
     console.log('Category', this.props);
     return(
       <div>
-        <CategoryTitle cat={ this.props.params.cat} />
+        <CategoryTitle cat={ this.props.params.cat } />
         <AppCardBoxComp data={ this.state.data } />
       </div>
     );

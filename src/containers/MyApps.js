@@ -20,7 +20,10 @@ let MyApps = React.createClass({
   },
   render() {
     return(
-      <AppCardBoxComp data={ this.state.data } />
+      <div>
+        <h1>My Apps</h1>
+        <AppCardBoxComp data={ this.state.data } />
+      </div>
     );
   }
 });

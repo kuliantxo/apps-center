@@ -4,7 +4,6 @@ require("./cards.less");
 
 var AppCardRatingsComp = React.createClass({
   render: function() {
-    console.log('AppCardRatingsComp', this.props);
     return (
       <div className="ratings">
         <span className="fa fa-star"></span>
@@ -23,7 +22,6 @@ var AppCardRatingsComp = React.createClass({
 
 var AppCard = React.createClass({
   render: function() {
-    console.log('AppCardItemComp', this.props);
     return (
       <div className="col-sm-6 col-md-4 col-lg-3">
         <Link to="/app/peperoni">
@@ -50,7 +48,6 @@ var AppCard = React.createClass({
 
 var AppCardComp = React.createClass({
   render: function() {
-    console.log('AppCardComp', this.props);
     var cardNode = this.props.data.map(function(card) {
       return (
         React.createElement(AppCard, {item: card, key: card.id})
@@ -66,7 +63,6 @@ var AppCardComp = React.createClass({
 
 var AppCardBoxComp = React.createClass({
   render: function() {
-    console.log('AppCardBoxComp', this.props);
     return (
       <div>
         <AppCardComp data={ this.props.data } />

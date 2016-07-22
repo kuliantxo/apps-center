@@ -6,7 +6,7 @@ var DropDownMenu = React.createClass({
   render: function() {
     var dropDownItem = this.props.data.map(function(item) {
       return (
-        <li>
+        <li key={ item.id }>
           <Link to={ '/app/' + item.id }>
             <div className="media">
               <div className="media-left media-middle">

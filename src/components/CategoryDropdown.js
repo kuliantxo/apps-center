@@ -19,15 +19,10 @@ var CategoryDropdown = React.createClass({
     });
   },
   render: function() {
-//    Object.keys(yourObject).map(function(key) {
-//        return <div>Key: {key}, Value: {yourObject[key]}</div>;
-//    })
-
-
     var data = this.state.data;
     var dropDownItem = Object.keys(data).map(function(key) {
       return (
-        <li>
+        <li key={ key }>
           <Link to={ '/category/' + key }>
             { data[key].name }
           </Link>

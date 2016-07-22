@@ -8,12 +8,12 @@ var AppCardRatingsComp = React.createClass({
     for(var i = 0; i < 5; i++) {
       if (this.props.rating > i) {
         if (this.props.rating > i && this.props.rating < (i+1)) {
-          rating.push(<span className="rating"><span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span className="glyphicon glyphicon-star glyphicon-star-half" aria-hidden="true"></span></span>);
+          rating.push(<span key={ i } className="rating"><span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span className="glyphicon glyphicon-star glyphicon-star-half" aria-hidden="true"></span></span>);
         } else {
-          rating.push(<span className="rating"><span className="glyphicon glyphicon-star" aria-hidden="true"></span></span>);
+          rating.push(<span key={ i } className="rating"><span className="glyphicon glyphicon-star" aria-hidden="true"></span></span>);
         }
       } else {
-        rating.push(<span className="rating"><span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span></span>);
+        rating.push(<span key={ i } className="rating"><span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span></span>);
       }
     }
     return (
@@ -42,7 +42,7 @@ var AppCard = React.createClass({
               <div>
                 { this.props.item.tagline }
               </div>
-              <AppCardRatingsComp rating={ this.props.item.rating } reviews={ this.props.item.reviews } />
+              <AppCardRatingsComp key={ this.props.item.id } rating={ this.props.item.rating } reviews={ this.props.item.reviews } />
             </div>
           </div>
         </Link>
@@ -53,6 +53,7 @@ var AppCard = React.createClass({
 
 var AppCardComp = React.createClass({
   render: function() {
+console.log('AppCardComp', this.props);
     var cardNode = this.props.data.map(function(card) {
       return (
         React.createElement(AppCard, {item: card, key: card.id})

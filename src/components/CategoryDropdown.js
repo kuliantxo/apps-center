@@ -31,8 +31,8 @@ var CategoryDropdown = React.createClass({
     });
     return (
       <div className="dropdown">
-        <button className="btn btn-default dropdown-toggle" type="button" id="categroyDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Browse apps by category
+        <button className="btn btn-default btn-block dropdown-toggle" type="button" id="categroyDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span className="text">Browse apps by category</span>
           <span className="caret"></span>
         </button>
         <ul className="dropdown-menu" aria-labelledby="categoryDropdownropdown">

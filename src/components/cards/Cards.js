@@ -27,10 +27,15 @@ var AppCardRatingsComp = React.createClass({
 
 var AppCard = React.createClass({
   render: function() {
+    var thumbnailPro = '';
+    if (this.props.item.pro === true) {
+      thumbnailPro = <div className="thumbnail-pro"><span className="glyphicon glyphicon-star" aria-hidden="true"></span></div>;
+    }
     return (
       <div className="col-sm-6 col-md-4 col-lg-3">
         <Link to="/app/peperoni">
           <div className="thumbnail thumbnail-card">
+            { thumbnailPro }
             <img src={ 'https://images.appcenter.intuit.com/Content/images/AppCards' + this.props.item.img } />
             <div className="caption">
               <h3>

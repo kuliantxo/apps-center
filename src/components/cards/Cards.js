@@ -4,17 +4,22 @@ require("./cards.less");
 
 var AppCardRatingsComp = React.createClass({
   render: function() {
+    var rating = [];
+    for(var i = 0; i < 5; i++) {
+      if (this.props.rating > i) {
+        if (this.props.rating > i && this.props.rating < (i+1)) {
+          rating.push(<span className="rating"><span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span className="glyphicon glyphicon-star glyphicon-star-half" aria-hidden="true"></span></span>);
+        } else {
+          rating.push(<span className="rating"><span className="glyphicon glyphicon-star" aria-hidden="true"></span></span>);
+        }
+      } else {
+        rating.push(<span className="rating"><span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span></span>);
+      }
+    }
     return (
       <div className="ratings">
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star-half"></span>
-        <span className="fa fa-star grey-star"></span>
-        <span className="review">
-          <span className="reviews">({ this.props.reviews })</span>
-        </span>
+        { rating }
+        <span className="reviews">({ this.props.reviews })</span>
       </div>
     );
   }

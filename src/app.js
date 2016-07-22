@@ -5,7 +5,7 @@ import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 import App from './containers/App.js';
 import Home from './containers/Home.js';
 import MyApps from './containers/MyApps.js';
-import AppCard from './containers/AppCard.js';
+import Description from './containers/Description.js';
 import Search from './containers/Search.js';
 import Category from './containers/Category.js';
 
@@ -14,7 +14,7 @@ ReactDOM.render(
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
       <Route path="/my_apps" component={MyApps} />
-      <Route path="/app/:appId" component={AppCard} />
+      <Route path="/app/:appId" component={Description} />
       <Route path="/search/:query" component={Search} />
       <Route path="/category/:cat" component={Category} />
     </Route>

@@ -73,7 +73,7 @@ let AppCardDescription = React.createClass({
   }
 });
 
-let AppCard = React.createClass({
+let Description = React.createClass({
   getInitialState: function() {
     return {data: []};
   },
@@ -100,4 +100,4 @@ let AppCard = React.createClass({
   }
 });
 
-export default AppCard;
+export default Description;

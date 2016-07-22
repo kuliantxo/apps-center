@@ -21,11 +21,9 @@ console.log('CategoryTitle ajax', data);
     });
   },
   render() {
-//    console.log('CategoryTitle', this.props.cat);
-//    console.log('CategoryTitle', this.state.data);
+console.log('CategoryTitle', this.props);
     return(
       <h1>{ this.state.data }</h1>
-//      <h1>{ this.state.data[this.props.cat].name }</h1>
     );
   }
 });

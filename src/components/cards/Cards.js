@@ -53,7 +53,6 @@ var AppCard = React.createClass({
 
 var AppCardComp = React.createClass({
   render: function() {
-console.log('AppCardComp', this.props);
     var cardNode = this.props.data.map(function(card) {
       return (
         React.createElement(AppCard, {item: card, key: card.id})

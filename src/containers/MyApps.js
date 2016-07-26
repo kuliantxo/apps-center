@@ -1,5 +1,5 @@
 import React from 'react';
-import AppCardBoxComp from '../components/cards/Cards.js';
+import CardsCarousel from '../components/cards-carousel/CardsCarousel.js';
 
 let MyApps = React.createClass({
   getInitialState: function() {
@@ -22,7 +22,7 @@ let MyApps = React.createClass({
     return(
       <div>
         <h1>My Apps</h1>
-        <AppCardBoxComp data={ this.state.data } />
+        <CardsCarousel data={ this.state.data } />
       </div>
     );
   }

@@ -22,7 +22,7 @@ let MyApps = React.createClass({
     return(
       <div>
         <h1>My Apps</h1>
-        <CardsCarousel data={ this.state.data } />
+        <CardsCarousel carId='myCar' data={ this.state.data } />
       </div>
     );
   }

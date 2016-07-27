@@ -15,16 +15,17 @@ var Pagination = React.createClass({
     this.props.onPageClick(i);
   },
   render: function() {
+console.log('Pagination', this.props);
     var pages = [];
     var activeClass = '';
-    pages.push(<li key="p"><a href="#" onClick={ this.handleClick } aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>);
-    for(var i = 1; i < this.props.pages; i++){
+    pages.push(<li key="p"><a href="#" onClick={ this.handleClick.bind(this, 1) } aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>);
+    for(var i = 1; i < this.props.pages + 1; i++){
       if(i > (this.state.page - 4) && i < (this.state.page + 4)) {
         activeClass = (i == this.state.page) ? 'active' : '';
         pages.push(<li key={ i } className={ activeClass }><a href="#" onClick={ this.handleClick.bind(this, i) }>{ i }</a></li>);
       }
     }
-    pages.push(<li key="n"><a href="#" onClick={ this.handleClick } aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>);
+    pages.push(<li key="n"><a href="#" onClick={ this.handleClick.bind(this, this.props.pages) } aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>);
     return (
       <nav aria-label="Cards navigation">
         <ul className="pagination">
@@ -46,7 +47,6 @@ var CardsPagination = React.createClass({
     this.setState({ paginated: prop.data.slice(0, 8) });
   },
   componentWillReceiveProps: function(nextProps) {
-console.log('componentWillReceiveProps', nextProps);
     this.updateProps(nextProps);
   },
   handlePageClick: function(page) {
@@ -54,7 +54,7 @@ console.log('componentWillReceiveProps', nextProps);
     this.setState({ paginated: this.props.data.slice((page - 1) * 8, page * 8) });
   },
   render: function() {
-    var pages = this.props.data.length / 8;
+    var pages = (this.props.data.length / 8) + ((this.props.data.length % 8 == 0) ? 0 : 1);
     return (
       <div>
         <AppCardComp data={ this.state.paginated } />

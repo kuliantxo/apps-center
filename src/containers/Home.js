@@ -1,5 +1,5 @@
 import React from 'react';
-import AppCardBoxComp from '../components/cards/Cards.js';
+import CardsPagination from '../components/cards-pagination/CardsPagination.js';
 
 let Home = React.createClass({
   getInitialState: function() {
@@ -22,7 +22,7 @@ let Home = React.createClass({
     return(
       <div>
         <h1>All Apps</h1>
-        <AppCardBoxComp data={ this.state.data } />
+        <CardsPagination data={ this.state.data } />
       </div>
     );
   }

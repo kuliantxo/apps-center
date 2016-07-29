@@ -3,27 +3,37 @@ import AppCardBoxComp from '../components/cards/Cards.js';
 
 let CategoryTitle = React.createClass({
   getInitialState: function() {
-    return {data: ''};
+console.log('CategoryTitle getInitialState', this.props);
+    return {title: ''};
   },
-  componentDidMount: function() {
+  updateTitle: function(prop) {
+console.log('CategoryTitle updateTitle', prop);
     $.ajax({
       url: "../../json/categories.json",
       dataType: 'json',
       cache: false,
       success: function(data) {
-console.log('CategoryTitle ajax', this.props.cat);
-console.log('CategoryTitle ajax', data);
-        this.setState({data: data[this.props.cat].name});
+    console.log('CategoryTitle ajax', prop);
+    console.log('CategoryTitle ajax', data);
+        this.setState({title: data[prop].name});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
   },
+  componentWillReceiveProps: function(nextProps) {
+console.log('CategoryTitle componentWillReceiveProps', nextProps);
+    this.updateTitle(nextProps.cat);
+  },
+  componentDidMount: function() {
+console.log('CategoryTitle componentDidMount', this.props);
+    this.updateTitle(this.props.cat);
+  },
   render() {
 console.log('CategoryTitle', this.props);
     return(
-      <h1>{ this.state.data }</h1>
+      <h1>{ this.state.title }</h1>
     );
   }
 });

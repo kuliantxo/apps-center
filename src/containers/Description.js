@@ -1,4 +1,6 @@
 import React from 'react';
+import DescriptionThumbnails from '../components/description-thumbnails/DescriptionThumbnails.js'
+require("./description.less");
 
 let AppCardTop = React.createClass({
   render: function() {
@@ -22,12 +24,28 @@ let AppCardTop = React.createClass({
 });
 
 let AppCardDescription = React.createClass({
+  getInitialState: function() {
+    return {image: {}};
+  },
+  updateProps: function(prop) {
+    this.setState({ image: prop.data.images[0] });
+  },
+  componentWillReceiveProps: function(nextProps) {
+    this.updateProps(nextProps);
+  },
+  handleImageClick: function(i) {
+    this.setState({image: this.props.data.images[i]});
+  },
   render: function() {
     console.log('AppCardDescription', this.props);
+    var bigImage = <img src={ this.state.image.url } alt={ this.state.image.title } title={ this.state.image.title } />;
+    if ( this.state.image.iframe ) {
+      bigImage = <iframe name="player-iframe" id="appCardVideo" frameBorder="0" title="YouTube video player" width="640" height="400" src={ this.state.image.iframe }></iframe>
+    }
     return (
       <div className="row">
-        <div className="col-sm-8">
-          <iframe name="player-iframe" id="appCardVideo" frameBorder="0" title="YouTube video player" width="640" height="400" src="https://www.youtube.com/embed/WNxXbHQBb8w?widget_referrer=https%3A%2F%2Fqbo.intuit.com%2Fapp%2FqboAppCard%3FshortName%3Dtrxlinkerequisition&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fappcenter.intuit.com&amp;widgetid=1"></iframe>
+        <div className="col-sm-8 big-image">
+          { bigImage }
           <h3>
             Description
           </h3>
@@ -35,39 +53,7 @@ let AppCardDescription = React.createClass({
             { this.props.data.description }
           </div>
         </div>
-        <div className="col-sm-4">
-          <div className="row">
-            <div className="col-sm-6">
-              <div className="thumbnail">
-                <img src="https://img.youtube.com/vi/WNxXbHQBb8w/0.jpg" />
-              </div>
-            </div>
-            <div className="col-sm-6">
-              <div className="thumbnail">
-                <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature1.PNG" alt="Integrated Requisition Screen" title="Integrated Requisition Screen" />
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-6">
-              <div className="thumbnail">
-                <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature2.PNG" alt="Informative Home Screen" title="Informative Home Screen" />
-              </div>
-            </div>
-            <div className="col-sm-6">
-              <div className="thumbnail">
-                <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature3.PNG" alt="User Management" title="User Management" />
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-6">
-              <div className="thumbnail">
-                <img src="https://images.appcenter.intuit.com//Content/images/AppCards/b7qvm44mnh/7/Feature4.PNG" alt="Workflow Management" title="Workflow Management" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <DescriptionThumbnails onImageClick={this.handleImageClick} data={ this.props.data.images } />
       </div>
     );
   }

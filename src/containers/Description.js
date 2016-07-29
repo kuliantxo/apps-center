@@ -44,7 +44,7 @@ let AppCardDescription = React.createClass({
     }
     return (
       <div className="row">
-        <div className="col-sm-8 big-image">
+        <div className="col-sm-7 big-image">
           { bigImage }
           <h3>
             Description

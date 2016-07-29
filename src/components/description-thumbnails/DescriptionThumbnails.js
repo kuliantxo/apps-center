@@ -4,7 +4,8 @@ require("./thumbnails.less");
 let DescriptionThumbnails = React.createClass({
   getInitialState: function() {
     return {
-      data: []
+      data: [],
+      selected: 0
     };
   },
   updateProps: function(prop) {
@@ -14,22 +15,24 @@ let DescriptionThumbnails = React.createClass({
     this.updateProps(nextProps);
   },
   handleClick: function(i, e) {
+    this.state.selected = i;
     this.props.onImageClick(i);
   },
   render: function() {
     console.log('AppCardImages', this.props);
     var imageNodes = this.state.data.map(function(image, index) {
+      var selected = (index == this.state.selected) ? ' selected' : '';
       return (
         <div key={ index } className="col-sm-6">
-          <div className="thumbnail thumbnail-description" onClick={ this.handleClick.bind(this, index) }>
+          <div className={ 'thumbnail thumbnail-description' + selected } onClick={ this.handleClick.bind(this, index) }>
             <img src={ image.url } alt={ image.title } title={ image.title } />
           </div>
         </div>
       );
     }, this);
     return (
-      <div className="row">
-        <div className="col-sm-4">
+      <div className="col-sm-5">
+        <div className="row">
           { imageNodes }
         </div>
       </div>

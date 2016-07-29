@@ -20,10 +20,20 @@ module.exports = {
       loaders: [
           { test: /\.jsx?$/, loaders: ['react-hot', 'babel'], include: /src/ },
 //            { test: /\.js$/, include: /src/, loader: 'babel-loader'},
-          { test: /\.less$/, loader: ExtractTextPlugin.extract(
-                  // activate source maps via loader query
-                  'css?sourceMap!' +
-                  'less?sourceMap') }
+          {
+            test: /\.less$/, loader: ExtractTextPlugin.extract(
+              // activate source maps via loader query
+              'css?sourceMap!' +
+              'less?sourceMap'
+            )
+          },
+          {
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            loaders: [
+              'file?hash=sha512&digest=hex&name=[hash].[ext]',
+              'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+            ]
+          }
       ]
   },
   plugins: [

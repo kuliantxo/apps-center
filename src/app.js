@@ -5,7 +5,7 @@ import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 import App from './containers/App.js';
 import Home from './containers/Home.js';
 import MyApps from './containers/MyApps.js';
-import Description from './containers/Description.js';
+import Description from './containers/description/Description.js';
 import Search from './containers/Search.js';
 import Category from './containers/Category.js';
 

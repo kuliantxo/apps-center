@@ -1,8 +1,18 @@
 import React from 'react';
-import DescriptionThumbnails from '../components/description-thumbnails/DescriptionThumbnails.js'
+import DescriptionThumbnails from '../../components/description-thumbnails/DescriptionThumbnails.js'
+import Modal from '../../components/modal/Modal.js'
 require("./description.less");
 
 let AppCardTop = React.createClass({
+  getInitialState(){
+      return {view: {showModal: false}}
+  },
+  handleHideModal(){
+      this.setState({view: {showModal: false}})
+  },
+  handleShowModal(){
+      this.setState({view: {showModal: true}})
+  },
   render: function() {
     console.log('AppCardTop', this.props);
     return (
@@ -16,8 +26,9 @@ let AppCardTop = React.createClass({
           </div>
         </div>
         <div className="col-sm-4 text-right">
-          <button className="btn btn-lg btn-primary">Learn More</button>
+          <button className="btn btn-lg btn-primary" onClick={this.handleShowModal}>Learn More</button>
         </div>
+        {this.state.view.showModal ? <Modal handleHideModal={this.handleHideModal}/> : null}
       </div>
     );
   }

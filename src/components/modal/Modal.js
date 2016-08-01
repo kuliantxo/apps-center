@@ -29,4 +29,6 @@ console.log('componentDidMount', this);
   }
 });
 
+// http://jamesknelson.com/rendering-react-components-to-the-document-body/
+
 export default Modal;

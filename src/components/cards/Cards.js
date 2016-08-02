@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Grid, Row, Col, DropdownButton, MenuItem, FormGroup, InputGroup, FormControl, Glyphicon, Thumbnail, Button } from 'react-bootstrap';
 require("./cards.less");
 
 var AppCardRatingsComp = React.createClass({
@@ -67,9 +68,9 @@ var AppCardComp = React.createClass({
       );
     });
     return (
-      <div className="row">
+      <Row>
         { cardNode }
-      </div>
+      </Row>
     );
   }
 });

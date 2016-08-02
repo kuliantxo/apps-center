@@ -15,7 +15,6 @@ var Pagination = React.createClass({
     this.props.onPageClick(i);
   },
   render: function() {
-console.log('Pagination', this.props);
     var pages = [];
     var activeClass = '';
     pages.push(<li key="p"><a href="#" onClick={ this.handleClick.bind(this, 1) } aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 var CategoryDropdown = React.createClass({
   getInitialState: function() {
@@ -22,23 +23,17 @@ var CategoryDropdown = React.createClass({
     var data = this.state.data;
     var dropDownItem = Object.keys(data).map(function(key) {
       return (
-        <li key={ key }>
+        <MenuItem key={ key }>
           <Link to={ '/category/' + key }>
             { data[key].name }
           </Link>
-        </li>
+        </MenuItem>
       );
     });
     return (
-      <div className="dropdown">
-        <button className="btn btn-default btn-block dropdown-toggle" type="button" id="categroyDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <span className="text">Browse apps by category</span>
-          <span className="caret"></span>
-        </button>
-        <ul className="dropdown-menu" aria-labelledby="categoryDropdownropdown">
-          { dropDownItem }
-        </ul>
-      </div>
+      <DropdownButton title="Browse apps by category" id="browse-apps-category">
+        { dropDownItem }
+      </DropdownButton>
     );
   }
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
+import Typeahead from 'react-bootstrap-typeahead';
 
 var DropDownMenu = React.createClass({
   render: function() {
@@ -46,42 +47,17 @@ var SearchBar = React.createClass({
       }.bind(this)
     });
   },
-  handleQueryChange: function(e) {
-    this.setState({query: e.target.value});
-    if (e.target.value.length > 3) {
-      $('.search-bar-form .dropdown-menu').removeClass('hide');
-    } else {
-      $('.search-bar-form .dropdown-menu').addClass('hide');
-    }
-  },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var query = this.state.query.trim();
-    if (!query) {
-      return;
-    }
-    this.setState({query: ''});
-    $('.search-bar-form input').blur();
-    $('.search-bar-form button').blur();
-    $('.search-bar-form .dropdown-menu').addClass('hide');
-    browserHistory.push('/search/' + query);
+  _handleChange: function(query) {
+    console.log('pinch', query[0].id);
+    browserHistory.push('/search/' + query[0].id);
   },
   render: function() {
     return (
-      <form onSubmit={this.handleSubmit} className="search-bar-form">
-        <div className="input-group">
-          <input type="text" className="dropdown-toggle form-control" data-toggle="dropdown"
-            value={this.state.query}
-            onChange={this.handleQueryChange}
-          />
-          <DropDownMenu data={this.state.data} />
-          <span className="input-group-btn">
-            <button className="btn btn-default" type="submit">
-              <span className="glyphicon glyphicon-search"></span>
-            </button>
-          </span>
-        </div>
-      </form>
+      <Typeahead
+        labelKey="name"
+        onChange={this._handleChange}
+        options={this.state.data}
+      />
     );
   }
 });

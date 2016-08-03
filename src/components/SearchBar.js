@@ -48,13 +48,19 @@ var SearchBar = React.createClass({
     });
   },
   _handleChange: function(query) {
-    console.log('pinch', query[0].id);
-    browserHistory.push('/search/' + query[0].id);
+    if (query.length) {
+      if (query[0].customOption) {
+        browserHistory.push('/search/' + query[0].name);
+      } else {
+        browserHistory.push('/app/' + query[0].id);
+      }
+    }
   },
   render: function() {
     return (
       <Typeahead
         labelKey="name"
+        allowNew={true}
         onChange={this._handleChange}
         options={this.state.data}
       />

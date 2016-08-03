@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 var CategoryDropdown = React.createClass({
@@ -23,15 +23,13 @@ var CategoryDropdown = React.createClass({
     var data = this.state.data;
     var dropDownItem = Object.keys(data).map(function(key) {
       return (
-        <MenuItem key={ key }>
-          <Link to={ '/category/' + key }>
-            { data[key].name }
-          </Link>
+        <MenuItem eventKey={ key }>
+          { data[key].name }
         </MenuItem>
       );
     });
     return (
-      <DropdownButton title="Browse apps by category" id="browse-apps-category">
+      <DropdownButton onSelect={ function (key) { browserHistory.push('/category/' + key) }} title="Browse apps by category" id="browse-apps-category">
         { dropDownItem }
       </DropdownButton>
     );

@@ -27,8 +27,8 @@ var AppCardRatingsComp = React.createClass({
 });
 
 var AppCard = React.createClass({
-  handleClick: function(i) {
-    $(i.target).removeClass('loader');
+  handleClick: function() {
+    this.refs.loaderRef.className = "";
   },
   render: function() {
     var thumbnailPro = '';
@@ -40,7 +40,7 @@ var AppCard = React.createClass({
         <Link to="/app/peperoni">
           <div className="thumbnail thumbnail-card">
             { thumbnailPro }
-            <img className="loader" onLoad={ this.handleClick.bind(this) } src={ 'https://images.appcenter.intuit.com/Content/images/AppCards' + this.props.item.img } />
+            <img className="loader" ref="loaderRef" onLoad={ this.handleClick } src={ 'https://images.appcenter.intuit.com/Content/images/AppCards' + this.props.item.img } />
             <div className="caption">
               <h3>
                 { this.props.item.name }

@@ -29,6 +29,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "react-bootstrap": "^0.29.5"
+    "react-bootstrap": "^0.29.5",
+    "whatwg-fetch": "^1.0.0"
   }
 }

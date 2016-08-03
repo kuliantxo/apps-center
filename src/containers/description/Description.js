@@ -86,17 +86,14 @@ let Description = React.createClass({
     return {data: []};
   },
   componentDidMount: function() {
-    $.ajax({
-      url: "../../json/description.json",
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+    fetch('../../json/description.json')
+      .then(function(response) {
+        return response.json()
+      }).then(function(json) {
+        this.setState({data: json});
+      }.bind(this)).catch(function(ex) {
+        console.log('parsing failed', ex)
+      });
   },
   render() {
     return(

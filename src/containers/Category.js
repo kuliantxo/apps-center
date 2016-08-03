@@ -3,35 +3,26 @@ import AppCardBoxComp from '../components/cards/Cards.js';
 
 let CategoryTitle = React.createClass({
   getInitialState: function() {
-console.log('CategoryTitle getInitialState', this.props);
     return {title: ''};
   },
   updateTitle: function(prop) {
-console.log('CategoryTitle updateTitle', prop);
-    $.ajax({
-      url: "../../json/categories.json",
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-    console.log('CategoryTitle ajax', prop);
-    console.log('CategoryTitle ajax', data);
-        this.setState({title: data[prop].name});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+    fetch('../../json/categories.json')
+      .then(function(response) {
+        return response.json()
+      }).then(function(json) {
+        console.log('parsed json', json)
+        this.setState({title: json[prop].name});
+      }.bind(this)).catch(function(ex) {
+        console.log('parsing failed', ex)
+      });
   },
   componentWillReceiveProps: function(nextProps) {
-console.log('CategoryTitle componentWillReceiveProps', nextProps);
     this.updateTitle(nextProps.cat);
   },
   componentDidMount: function() {
-console.log('CategoryTitle componentDidMount', this.props);
     this.updateTitle(this.props.cat);
   },
   render() {
-console.log('CategoryTitle', this.props);
     return(
       <h1>{ this.state.title }</h1>
     );
@@ -43,17 +34,14 @@ let Category = React.createClass({
     return {data: []};
   },
   componentDidMount: function() {
-    $.ajax({
-      url: "../../json/my.json",
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+    fetch('../../json/my.json')
+      .then(function(response) {
+        return response.json()
+      }).then(function(json) {
+        this.setState({data: json});
+      }.bind(this)).catch(function(ex) {
+        console.log('parsing failed', ex)
+      });
   },
   render() {
     console.log('Category', this.props);

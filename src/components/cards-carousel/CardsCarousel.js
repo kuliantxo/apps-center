@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router';
 import AppCardComp from '../cards/Cards.js';
+import {React_Boostrap_Carousel} from 'react-boostrap-carousel';
 require("./carousel.less");
 
 var CardsCarousel = React.createClass({
@@ -18,20 +18,9 @@ var CardsCarousel = React.createClass({
       rating.push(<div key={ i } className='item'><AppCardComp data={ tmp } /></div>);
     }
     return (
-      <div id={ this.props.carId} className="carousel slide" data-ride="carousel">
-        <div className="carousel-inner" role="listbox">
-            { rating }
-        </div>
-
-        <a className="left carousel-control" href={ '#' + this.props.carId} role="button" data-slide="prev">
-          <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span className="sr-only">Previous</span>
-        </a>
-        <a className="right carousel-control" href={ '#' + this.props.carId} role="button" data-slide="next">
-          <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span className="sr-only">Next</span>
-        </a>
-      </div>
+      <React_Boostrap_Carousel animation={true} className="carousel-fade">
+        { rating }
+      </React_Boostrap_Carousel>
     );
   }
 });

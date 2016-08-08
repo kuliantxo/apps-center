@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "AppsCenter project.",
   "scripts": {
-    "start": "webpack-dev-server --hot --progress --colors",
+    "start": "webpack-dev-server --hot --progress --inline --colors",
     "build": "webpack --progress --colors"
   },
   "author": "Julian Miqueo",

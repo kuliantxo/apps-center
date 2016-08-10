@@ -1,6 +1,7 @@
 import React from 'react';
 import DescriptionThumbnails from '../../components/description-thumbnails/DescriptionThumbnails.js'
-import { Modal, Button } from 'react-bootstrap';
+import SignIn from '../../forms/SignIn.js'
+import { Col, Modal, Button } from 'react-bootstrap';
 require("./description.less");
 
 let AppCardTop = React.createClass({
@@ -30,11 +31,10 @@ let AppCardTop = React.createClass({
         </div>
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Sign In</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Text in a modal</h4>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+            <SignIn />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close}>Close</Button>

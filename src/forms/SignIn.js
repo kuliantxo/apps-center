@@ -1,6 +1,9 @@
 import React from 'react';
 import { Col, FormGroup, FormControl, ControlLabel, HelpBlock, Checkbox, Button } from 'react-bootstrap';
 
+// https://clozeit.wordpress.com/2014/01/13/bootstrap-forms-using-react-js/
+// http://stackoverflow.com/questions/27864951/how-to-access-childs-state-in-react
+
 var Input = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired,
@@ -54,6 +57,7 @@ var Input = React.createClass({
     else if (this.props.minLength && value.length < this.props.minLength)
       error = 'minLength';
     this.setState({error: error});
+    this.props.onChange();
   },
   onFocus: function(e) {
     console.log('Input: onFocus');
@@ -67,7 +71,7 @@ var Form = React.createClass({
     callback: React.PropTypes.func.isRequired,
   },
   getDefaultProps: function() {
-    console.log('Form: getDefaultProps');
+    console.log('Form: getDefaultProps', this.props);
     return {
       bsClass: "form"
     };
@@ -76,49 +80,85 @@ var Form = React.createClass({
     console.log('Form: getValues', this.props);
     var values= {errors: {}};
     var err;
-    this.props.children.forEach(function(child, idx){
-      console.log('Form: forEach', child, idx);
-      if (child && child.props.name) {
-        values[child.props.name] = child.getValue();
-        err = child.state.error;
-        if (err)
-          values.errors[child.props.name] = err;
-      }
-    });
+    // this.props.children.forEach(function(child, idx){
+    //   console.log('Form: forEach', child, idx);
+    //   if (child && child.props.name) {
+    //     values[child.props.name] = child.getValue();
+    //     err = child.state.error;
+    //     if (err)
+    //       values.errors[child.props.name] = err;
+    //   }
+    // });
     return values;
   },
-  onSubmit: function(e) {
-    console.log('Form: onSubmit');
-    e.preventDefault();
-    if (e.target.type == 'submit') {
-      this.props.callback(this.getValues());
-    }
+  handleFieldChange: function(fieldId, value) {
+    console.log('handleFieldChange', fieldId, value);
+    // var newState = {};
+    // newState[fieldId] = value;
+    //
+    // this.setState(newState);
   },
-  handleLogin: function(e) {
-    console.log('Form: handleLogin', e);
+  onSubmit: function(e) {
+    console.log('Form: onSubmit', e.target);
+    e.preventDefault();
+//    if (e.target.type == 'submit') {
+      this.props.callback(this.getValues());
+//    }
   },
   render: function(){
     console.log('Form: render', this.props);
+    var fields = this.props.fields.map(function(field) {
+      console.log('Form: render children', field);
+      var props = {
+        onChange: this.handleFieldChange
+      }
+      console.log('Form: render children2', props);
+      console.log('Form: render children3', field.props);
+      return <Input {...props} {...field.props} />
+    }, this);
     return (
-      <form onClick={this.onSubmit} className={this.props.bsStyle} role="form">
-        {this.props.children}
+      <form onSubmit={this.onSubmit} className={this.props.bsStyle} role="form">
+        { fields }
+        { this.props.children }
       </form>
     );
   }
 });
 
+let fields = [
+  {
+    ele: 'input',
+    props: {
+      key: 1,
+      name: "email",
+      type: "email",
+      placeholder: "Email",
+      required: true
+    }
+  },
+  {
+    ele: 'input',
+    props: {
+      key: 2,
+      name: "password",
+      type: "password",
+      placeholder: "Password",
+      required: true,
+      minLength: 5
+    }
+  }
+];
+
 let SignIn = React.createClass({
+  handleLogin: function(e) {
+    console.log('Form: handleLogin', e);
+  },
   render: function() {
-  return (
-    <Form bsStyle="inline" callback={this.handleLogin}>
-    <Input name="email" type="email" placeholder="Email" required={true}/>
-    <Input name="password" type="password" placeholder="Password / Blank"
-      required={true} minLength={5}/>
-    <Button onClick={this.handleLogin} type="#" bsStyle="success">
-      Log in / Recover Pass
-    </Button>
-    </Form>
-  );
+    return (
+      <Form bsStyle="inline" fields={ fields } callback={this.handleLogin}>
+        <Button type="submit">Sign In</Button>
+      </Form>
+    );
   }
 });
 

@@ -7,7 +7,7 @@ import { Col, FormGroup, FormControl, ControlLabel, HelpBlock, Checkbox, Button 
 var Input = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired,
-    type: React.PropTypes.oneOf('email').isRequired,
+    type: React.PropTypes.oneOf(['email', 'password']).isRequired,
     placeholder: React.PropTypes.string,
     label: React.PropTypes.string,
     required: React.PropTypes.bool,
@@ -18,20 +18,19 @@ var Input = React.createClass({
     console.log('Input: getInitialState');
     return {};
   },
-  getValue: function() {
-    console.log('Input: getValue');
-//    return this.refs.input.getDOMNode().value;
-    return this.refs.input.value;
-  },
   renderInput: function(){
     console.log('Input: renderInput');
     var className = "form-control input-md";
     return <input type={this.props.type} className={className}
-      placeholder={this.props.placeholder} ref="input"/>;
+      placeholder={this.props.placeholder} ref="input" novalidate />;
   },
   renderLabel: function(){
     console.log('Input: renderLabel');
     return <label>{this.props.label}</label> ? this.props.label : undefined;
+  },
+  renderError: function(){
+    console.log('Input: renderError');
+    return <span class="error-block">{ this.state.error }</span> ? this.state.error : undefined;
   },
   render: function(){
     console.log('Input: render');
@@ -40,24 +39,24 @@ var Input = React.createClass({
       className += ' has-error';
     return (
       <div className={className} onBlur={this.onBlur} onFocus={this.onFocus}>
-      <pre>{ this.state.error }</pre>
-        {this.renderInput()}
         {this.renderLabel()}
+        {this.renderInput()}
+        {this.renderError()}
       </div>
     );
   },
   onBlur: function(e){
     console.log('Input: onBlur');
-    var value = this.getValue();
+    var value = this.refs.input.value;
     var error;
     if (this.props.required && !value)
-      error = 'required';
+      error = 'This field is required';
     else if (this.props.oneOf && !(value in this.props.oneOf))
       error = 'oneOf';
     else if (this.props.minLength && value.length < this.props.minLength)
-      error = 'minLength';
+      error = 'This field has a minimum of ' + this.props.minLength;
     this.setState({error: error});
-    this.props.onChange();
+    this.props.onChange(this.props.name, {error: error, value: value});
   },
   onFocus: function(e) {
     console.log('Input: onFocus');
@@ -76,33 +75,17 @@ var Form = React.createClass({
       bsClass: "form"
     };
   },
-  getValues: function() {
-    console.log('Form: getValues', this.props);
-    var values= {errors: {}};
-    var err;
-    // this.props.children.forEach(function(child, idx){
-    //   console.log('Form: forEach', child, idx);
-    //   if (child && child.props.name) {
-    //     values[child.props.name] = child.getValue();
-    //     err = child.state.error;
-    //     if (err)
-    //       values.errors[child.props.name] = err;
-    //   }
-    // });
-    return values;
-  },
-  handleFieldChange: function(fieldId, value) {
-    console.log('handleFieldChange', fieldId, value);
-    // var newState = {};
-    // newState[fieldId] = value;
-    //
-    // this.setState(newState);
+  handleFieldChange: function(field, value) {
+    console.log('handleFieldChange', field, value);
+    var newState = {};
+    newState[field] = value;
+    this.setState(newState);
   },
   onSubmit: function(e) {
     console.log('Form: onSubmit', e.target);
     e.preventDefault();
 //    if (e.target.type == 'submit') {
-      this.props.callback(this.getValues());
+      this.props.callback(this.state);
 //    }
   },
   render: function(){

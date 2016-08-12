@@ -20,7 +20,7 @@ var CategoryDropdown = React.createClass({
     var data = this.state.data;
     var dropDownItem = Object.keys(data).map(function(key) {
       return (
-        <MenuItem eventKey={ key }>
+        <MenuItem key={ key } eventKey={ key }>
           { data[key].name }
         </MenuItem>
       );

@@ -7,7 +7,7 @@ import { Col, FormGroup, FormControl, ControlLabel, HelpBlock, Checkbox, Button 
 var Input = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired,
-    type: React.PropTypes.oneOf(['email', 'password']).isRequired,
+    type: React.PropTypes.oneOf(['email', 'password', 'checkbox']).isRequired,
     placeholder: React.PropTypes.string,
     label: React.PropTypes.string,
     required: React.PropTypes.bool,
@@ -22,7 +22,7 @@ var Input = React.createClass({
     console.log('Input: renderInput');
     var className = "form-control input-md";
     return <input type={this.props.type} className={className}
-      placeholder={this.props.placeholder} ref="input" novalidate />;
+      placeholder={this.props.placeholder} ref="input" noValidate />;
   },
   renderLabel: function(){
     console.log('Input: renderLabel');
@@ -33,7 +33,7 @@ var Input = React.createClass({
     return <span class="error-block">{ this.state.error }</span> ? this.state.error : undefined;
   },
   render: function(){
-    console.log('Input: render');
+    console.log('Input: render', this.props);
     var className = "form-group";
     if (this.state.error)
       className += ' has-error';
@@ -54,7 +54,7 @@ var Input = React.createClass({
     else if (this.props.oneOf && !(value in this.props.oneOf))
       error = 'oneOf';
     else if (this.props.minLength && value.length < this.props.minLength)
-      error = 'This field has a minimum of ' + this.props.minLength;
+      error = 'This field requires a minimum of ' + this.props.minLength + ' characters';
     this.setState({error: error});
     this.props.onChange(this.props.name, {error: error, value: value});
   },
@@ -84,53 +84,36 @@ var Form = React.createClass({
   onSubmit: function(e) {
     console.log('Form: onSubmit', e.target);
     e.preventDefault();
-//    if (e.target.type == 'submit') {
-      this.props.callback(this.state);
-//    }
+    this.props.callback(this.state);
   },
   render: function(){
     console.log('Form: render', this.props);
-    var fields = this.props.fields.map(function(field) {
-      console.log('Form: render children', field);
-      var props = {
-        onChange: this.handleFieldChange
-      }
-      console.log('Form: render children2', props);
-      console.log('Form: render children3', field.props);
-      return <Input {...props} {...field.props} />
-    }, this);
+    console.log('Form: render children', this.props.children);
+//    var thisChildren = [];
+//    if(thisChildren.length == 0) {
+//      thisChildren = this.props.children.map(function(child){
+//        console.log('Form: render child', child);
+//        console.log('Form: render child type', child.type);
+//        if (child.type === RadioOption) {
+//          return React.cloneElement(child, {
+//           onChange: this.handleFieldChange
+//          });
+//       }
+//        return child;
+//      }, this);
+//    }
+    // console.log('Form: render children', thisChildren);
+    // thisChildren.map(function(child){
+    //   console.log('Form: render childx', child);
+    // });
     return (
       <form onSubmit={this.onSubmit} className={this.props.bsStyle} role="form">
-        { fields }
+        <pre>{ this.state }</pre>
         { this.props.children }
       </form>
     );
   }
 });
-
-let fields = [
-  {
-    ele: 'input',
-    props: {
-      key: 1,
-      name: "email",
-      type: "email",
-      placeholder: "Email",
-      required: true
-    }
-  },
-  {
-    ele: 'input',
-    props: {
-      key: 2,
-      name: "password",
-      type: "password",
-      placeholder: "Password",
-      required: true,
-      minLength: 5
-    }
-  }
-];
 
 let SignIn = React.createClass({
   handleLogin: function(e) {
@@ -138,8 +121,14 @@ let SignIn = React.createClass({
   },
   render: function() {
     return (
-      <Form bsStyle="inline" fields={ fields } callback={this.handleLogin}>
-        <Button type="submit">Sign In</Button>
+      <Form bsStyle="inline" callback={this.handleLogin}>
+        <Input key={1} name="email" type="email" placeholder="Email" required={true}/>
+        <Input key={2} name="password" type="password" placeholder="Password"
+          required={true} minLength={5}/>
+        <Input key={3} name="remember" type="checkbox" />
+        <Button key={4} type="submit" bsStyle="success">
+          Sign In
+        </Button>
       </Form>
     );
   }

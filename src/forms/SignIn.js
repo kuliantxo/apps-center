@@ -69,6 +69,9 @@ var Form = React.createClass({
   propTypes: {
     callback: React.PropTypes.func.isRequired,
   },
+  getInitialState() {
+    return {};
+  },
   getDefaultProps: function() {
     console.log('Form: getDefaultProps', this.props);
     return {
@@ -89,27 +92,21 @@ var Form = React.createClass({
   render: function(){
     console.log('Form: render', this.props);
     console.log('Form: render children', this.props.children);
-//    var thisChildren = [];
-//    if(thisChildren.length == 0) {
-//      thisChildren = this.props.children.map(function(child){
-//        console.log('Form: render child', child);
-//        console.log('Form: render child type', child.type);
-//        if (child.type === RadioOption) {
-//          return React.cloneElement(child, {
-//           onChange: this.handleFieldChange
-//          });
-//       }
-//        return child;
-//      }, this);
-//    }
-    // console.log('Form: render children', thisChildren);
-    // thisChildren.map(function(child){
-    //   console.log('Form: render childx', child);
-    // });
+    var thisChildren = React.Children.map(this.props.children, function(child){
+      console.log('Form: render child', child);
+      // if (child.type === RadioOption) {
+        return React.cloneElement(child, {
+          onChange: this.handleFieldChange
+        });
+      // }
+      // return child;
+    }, this);
+    console.log('Form: render children last', thisChildren);
     return (
       <form onSubmit={this.onSubmit} className={this.props.bsStyle} role="form">
-        <pre>{ this.state }</pre>
-        { this.props.children }
+      <pre>{ this.state && this.state.email && this.state.email.value }</pre>
+        <pre>{ this.state && this.state.email && this.state.email.error }</pre>
+        { thisChildren }
       </form>
     );
   }

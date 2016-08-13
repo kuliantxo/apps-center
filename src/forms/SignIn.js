@@ -20,9 +20,12 @@ var Input = React.createClass({
   },
   renderInput: function(){
     console.log('Input: renderInput');
-    var className = "form-control input-md";
+    var className = '';
+    if(['email', 'password'].indexOf(this.props.type) > -1) {
+      className = "form-control input-md";
+    }
     return <input type={this.props.type} className={className}
-      placeholder={this.props.placeholder} ref="input" noValidate />;
+      placeholder={this.props.placeholder} ref="input" />;
   },
   renderLabel: function(){
     console.log('Input: renderLabel');
@@ -34,14 +37,17 @@ var Input = React.createClass({
   },
   render: function(){
     console.log('Input: render', this.props);
+    console.log('Input: render', ['email', 'password'].indexOf(this.props.type));
     var className = "form-group";
-    if (this.state.error)
+    if (this.state.error) {
       className += ' has-error';
+    }
+    console.log('Input: render', className);
     return (
       <div className={className} onBlur={this.onBlur} onFocus={this.onFocus}>
-        {this.renderLabel()}
-        {this.renderInput()}
-        {this.renderError()}
+        { this.renderLabel() }
+        { this.renderInput() }
+        { this.renderError() }
       </div>
     );
   },
@@ -103,7 +109,7 @@ var Form = React.createClass({
     }, this);
     console.log('Form: render children last', thisChildren);
     return (
-      <form onSubmit={this.onSubmit} className={this.props.bsStyle} role="form">
+      <form onSubmit={this.onSubmit} className={this.props.bsStyle} role="form" noValidate>
       <pre>{ this.state && this.state.email && this.state.email.value }</pre>
         <pre>{ this.state && this.state.email && this.state.email.error }</pre>
         { thisChildren }
@@ -123,7 +129,7 @@ let SignIn = React.createClass({
         <Input key={2} name="password" type="password" placeholder="Password"
           required={true} minLength={5}/>
         <Input key={3} name="remember" type="checkbox" />
-        <Button key={4} type="submit" bsStyle="success">
+        <Button key={4} type="submit" bsStyle="primary">
           Sign In
         </Button>
       </Form>

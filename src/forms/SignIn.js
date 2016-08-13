@@ -16,7 +16,31 @@ var Input = React.createClass({
   },
   getInitialState: function() {
     console.log('Input: getInitialState');
-    return {};
+    return {
+      value: '',
+      error: ''
+    };
+  },
+  onBlur: function(e){
+    console.log('Input: onBlur');
+    var value = this.state.value;
+    if (this.props.required && !value) {
+      this.state.error = 'This field is required';
+      return 'error';
+    } else if (this.props.oneOf && !(value in this.props.oneOf)) {
+      this.state.error = 'oneOf';
+      return 'error';
+    } else if (this.props.minLength && value.length < this.props.minLength) {
+      this.state.error = 'This field requires a minimum of ' + this.props.minLength + ' characters';
+      return 'error';
+    }
+    this.state.error = '';
+  },
+  onChange: function(e) {
+    console.log('Input: onChange');
+    this.setState({value: this.refs.input.value});
+    this.props.onChange(this.props.name, {error: this.state.error, value: this.refs.input.value});
+    e.stopPropagation();
   },
   renderInput: function(){
     console.log('Input: renderInput');
@@ -25,7 +49,7 @@ var Input = React.createClass({
       className = "form-control input-md";
     }
     return <input type={this.props.type} className={className}
-      placeholder={this.props.placeholder} ref="input" />;
+      placeholder={this.props.placeholder} ref="input" onChange={ this.onChange } />;
   },
   renderLabel: function(){
     console.log('Input: renderLabel');
@@ -39,35 +63,19 @@ var Input = React.createClass({
     console.log('Input: render', this.props);
     console.log('Input: render', ['email', 'password'].indexOf(this.props.type));
     var className = "form-group";
-    if (this.state.error) {
-      className += ' has-error';
-    }
+    // if (this.state.error) {
+    //   className += ' has-error';
+    // }
     console.log('Input: render', className);
     return (
-      <div className={className} onBlur={this.onBlur} onFocus={this.onFocus}>
+      <FormGroup validationState={this.onBlur()}>
+        <pre>{ this.state && this.state.error }</pre>
+        <pre>{ this.state && this.state.value }</pre>
         { this.renderLabel() }
         { this.renderInput() }
         { this.renderError() }
-      </div>
+      </FormGroup>
     );
-  },
-  onBlur: function(e){
-    console.log('Input: onBlur');
-    var value = this.refs.input.value;
-    var error;
-    if (this.props.required && !value)
-      error = 'This field is required';
-    else if (this.props.oneOf && !(value in this.props.oneOf))
-      error = 'oneOf';
-    else if (this.props.minLength && value.length < this.props.minLength)
-      error = 'This field requires a minimum of ' + this.props.minLength + ' characters';
-    this.setState({error: error});
-    this.props.onChange(this.props.name, {error: error, value: value});
-  },
-  onFocus: function(e) {
-    console.log('Input: onFocus');
-    this.setState({error: false});
-    e.stopPropagation();
   }
 });
 
@@ -110,9 +118,9 @@ var Form = React.createClass({
     console.log('Form: render children last', thisChildren);
     return (
       <form onSubmit={this.onSubmit} className={this.props.bsStyle} role="form" noValidate>
-      <pre>{ this.state && this.state.email && this.state.email.value }</pre>
-        <pre>{ this.state && this.state.email && this.state.email.error }</pre>
         { thisChildren }
+        <pre>{ this.state && this.state.email && this.state.email.value }</pre>
+        <pre>{ this.state && this.state.email && this.state.email.error }</pre>
       </form>
     );
   }

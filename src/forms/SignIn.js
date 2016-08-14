@@ -1,8 +1,12 @@
 import React from 'react';
 import { Col, FormGroup, FormControl, ControlLabel, HelpBlock, Checkbox, Button } from 'react-bootstrap';
+import auth from '../services/auth';
 
 // https://clozeit.wordpress.com/2014/01/13/bootstrap-forms-using-react-js/
 // http://stackoverflow.com/questions/27864951/how-to-access-childs-state-in-react
+// https://github.com/reactjs/react-router/blob/master/examples/auth-flow/auth.js
+// http://www.tech-dojo.org/#!/articles/5697fd5ddb99acd646dea1aa
+// https://github.com/tech-dojo/react-showcase
 
 var Input = React.createClass({
   propTypes: {
@@ -21,8 +25,8 @@ var Input = React.createClass({
       error: ''
     };
   },
-  onBlur: function(e){
-    console.log('Input: onBlur');
+  getValidationState: function(e){
+    console.log('Input: getValidationState');
     var value = this.state.value;
     if (this.props.required && !value) {
       this.state.error = 'This field is required';
@@ -68,7 +72,7 @@ var Input = React.createClass({
     // }
     console.log('Input: render', className);
     return (
-      <FormGroup validationState={this.onBlur()}>
+      <FormGroup validationState={this.getValidationState()}>
         <pre>{ this.state && this.state.error }</pre>
         <pre>{ this.state && this.state.value }</pre>
         { this.renderLabel() }
@@ -101,7 +105,7 @@ var Form = React.createClass({
   onSubmit: function(e) {
     console.log('Form: onSubmit', e.target);
     e.preventDefault();
-    this.props.callback(this.state);
+    this.props.callback(this.state.email.value, this.state.password.value);
   },
   render: function(){
     console.log('Form: render', this.props);
@@ -119,20 +123,24 @@ var Form = React.createClass({
     return (
       <form onSubmit={this.onSubmit} className={this.props.bsStyle} role="form" noValidate>
         { thisChildren }
-        <pre>{ this.state && this.state.email && this.state.email.value }</pre>
-        <pre>{ this.state && this.state.email && this.state.email.error }</pre>
       </form>
     );
   }
 });
 
 let SignIn = React.createClass({
-  handleLogin: function(e) {
-    console.log('Form: handleLogin', e);
+  handleSignin: function(email, password) {
+    console.log('Form: handleSignin', email, password);
+    auth.login(email, password, (loggedIn) => {
+      if (!loggedIn) {
+        alert( "Login Failed" );
+//        return this.setState({ error: "Login Failed" })
+      }
+    })
   },
   render: function() {
     return (
-      <Form bsStyle="inline" callback={this.handleLogin}>
+      <Form bsStyle="inline" callback={this.handleSignin}>
         <Input key={1} name="email" type="email" placeholder="Email" required={true}/>
         <Input key={2} name="password" type="password" placeholder="Password"
           required={true} minLength={5}/>

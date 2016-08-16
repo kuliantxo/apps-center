@@ -1,28 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { FormGroup, FormControl, InputGroup, Button } from 'react-bootstrap'
 import { addTodo } from '../actions'
 
 let AddTodo = ({ dispatch }) => {
   let input
 
   return (
-    <div>
-      <form onSubmit={e => {
-        e.preventDefault()
-        if (!input.value.trim()) {
-          return
-        }
-        dispatch(addTodo(input.value))
-        input.value = ''
-      }}>
-        <input ref={node => {
+    <form onSubmit={e => {
+      e.preventDefault()
+      if (!input.value.trim()) {
+        return
+      }
+      dispatch(addTodo(input.value))
+      input.value = ''
+    }}>
+      <div className="input-group">
+        <input type="text" className="form-control" placeholder="Search for..." ref={node => {
           input = node
         }} />
-        <button type="submit">
-          Add Todo
-        </button>
-      </form>
-    </div>
+        <span className="input-group-btn">
+          <button className="btn btn-default" type="submit">Add Todo</button>
+        </span>
+      </div>
+    </form>
   )
 }
 AddTodo = connect()(AddTodo)

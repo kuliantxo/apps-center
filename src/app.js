@@ -8,6 +8,7 @@ import MyApps from './containers/MyApps.js';
 import Description from './containers/description/Description.js';
 import Search from './containers/Search.js';
 import Category from './containers/Category.js';
+import Todo from './containers/todo/Todo.js';
 
 ReactDOM.render(
   (<Router history={browserHistory}>
@@ -17,6 +18,7 @@ ReactDOM.render(
       <Route path="/app/:appId" component={Description} />
       <Route path="/search/:query" component={Search} />
       <Route path="/category/:cat" component={Category} />
+      <Route path="/todo" component={Todo} />
     </Route>
   </Router>), document.getElementById('app')
 );

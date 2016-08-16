@@ -24,6 +24,7 @@ var App = React.createClass({
               <ul className="nav navbar-nav navbar-right">
                 <li><Link to="/">All Apps</Link></li>
                 <li><Link to="/my_apps">My Apps</Link></li>
+                <li><Link to="/todo">Todo</Link></li>
               </ul>
             </div>
           </div>

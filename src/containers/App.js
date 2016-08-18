@@ -30,7 +30,7 @@ var App = React.createClass({
           </div>
         </nav>
 
-        <section>
+        <section class="search-bar">
           <div className="container">
             <div className="row">
               <div className="col-sm-4">
@@ -42,8 +42,10 @@ var App = React.createClass({
             </div>
           </div>
         </section>
-        <section className="container">
-          { this.props.children }
+        <section className="main">
+          <div className="container">
+            { this.props.children }
+          </div>
         </section>
       </div>
     );

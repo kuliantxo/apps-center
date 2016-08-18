@@ -8,7 +8,7 @@ const Todo = ({ onClick, onDelete, completed, deleted, text }) => (
     }}
   >
     {text}
-    <button onClick={onDelete}>X</button>
+    <button onClick={onDelete} className="btn btn-link pull-right">X</button>
   </li>
 )
 

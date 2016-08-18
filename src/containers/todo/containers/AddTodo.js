@@ -16,7 +16,7 @@ let AddTodo = ({ dispatch }) => {
       input.value = ''
     }}>
       <div className="input-group">
-        <input type="text" className="form-control" placeholder="Search for..." ref={node => {
+        <input type="text" className="form-control" placeholder="New todo..." ref={node => {
           input = node
         }} />
         <span className="input-group-btn">

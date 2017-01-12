@@ -1,5 +1,5 @@
 # apps-center
-AppsCenter React Site
+Intuit AppsCenter React Site
 
 Based on http://jmfurlott.com/tutorial-setting-up-a-single-page-react-web-app-with-react-router-and-webpack/
 
